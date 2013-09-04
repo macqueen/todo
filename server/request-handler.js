@@ -1,5 +1,6 @@
 var express = require('express');
 var fs = require('fs');
+var mongoHandlers = require('./mongo-requests')
 
 var exp = module.exports.handleRequest = express();
 var filePath = '/Users/Jess/Documents/hack_reactor/todo'
@@ -29,8 +30,10 @@ exp.get('/app/todos.js', function(req, res){
   });
 });
 
-exp.post('/', function(req, res){
-	todos.push(req.body.todo);
-	res.redirect('/');
-  res.send(200);
-})
+// exp.post('/', function(req, res){
+// 	todos.push(req.body.todo);
+// 	res.redirect('/');
+//   res.send(200);
+// })
+
+exp.post('/', mongoHandlers.insertTodo);
