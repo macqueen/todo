@@ -30,10 +30,6 @@ exp.get('/app/todos.js', function(req, res){
   });
 });
 
-// exp.post('/', function(req, res){
-// 	todos.push(req.body.todo);
-// 	res.redirect('/');
-//   res.send(200);
-// })
-
 exp.post('/', mongoHandlers.insertTodo);
+
+exp.get('/all/todos', mongoHandlers.retrieveTodos);

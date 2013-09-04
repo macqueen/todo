@@ -8,7 +8,6 @@ client.open(function(error, p_client){
 	client.createCollection('todo_items', function(error, collection){
     todo_items = collection;
 	});
-	console.log('client open');
 });
 
 module.exports.insertTodo = function(req, res){
@@ -24,4 +23,17 @@ module.exports.insertTodo = function(req, res){
 	});
 	res.redirect('/');
 	res.send(200);
+};
+
+module.exports.retrieveTodos = function(req, res){
+	todo_items.find({status: "open"}, {_id: 0, todoItem: 1, status: 1}).toArray(function(error, results){
+		if(!error){
+			res.set('Content-Type', 'application/json');
+			var resultsJSON = JSON.stringify({itemList: results});
+			console.log(resultsJSON);
+			res.send(200, resultsJSON);
+		} else {
+			res.send(500, error);
+		}
+	});
 };
