@@ -52,6 +52,17 @@ exp.get('/app/List.js', function(req, res){
   });
 });
 
+exp.get('/app/App.js', function(req, res){
+  fs.readFile(filePath + '/public/app/App.js', function(error, content){
+    if(!error){
+      res.set('Content-Type', 'application/javascript');
+      res.send(200, content);
+    } else {
+      res.send(500, error);
+    }
+  });
+});
+
 exp.post('/', mongoHandlers.insertTodo);
 
 exp.get('/all/todos', mongoHandlers.retrieveTodos);

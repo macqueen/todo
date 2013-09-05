@@ -9,8 +9,7 @@ $(document).on('ready', function(){
   	$.ajax('http://127.0.0.1:8080/all/todos', {
       success: function(data){
         renderTodos(data);
-        var coll = new List(data.itemList);
-        console.log(coll);
+        startApp(data);
       },
       error: function(){
         console.log('error!');
@@ -25,6 +24,12 @@ $(document).on('ready', function(){
     	              .appendTo('.listContainer');
     }
   };
+
+  var startApp = function(data){
+    var myTodos = new List(data.itemList);
+    var myApp = new App({myTodos: myTodos});
+    console.log(myApp);
+  }
 
   getTodos();
 });
