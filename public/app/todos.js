@@ -9,6 +9,8 @@ $(document).on('ready', function(){
   	$.ajax('http://127.0.0.1:8080/all/todos', {
       success: function(data){
         renderTodos(data);
+        var coll = new List(data.itemList);
+        console.log(coll);
       },
       error: function(){
         console.log('error!');
